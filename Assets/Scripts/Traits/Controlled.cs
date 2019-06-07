@@ -35,14 +35,14 @@ public class Controlled : Trait
 	{
 		float hVel = Input.GetAxisRaw("Horizontal") * MOVE_SPEED;
 
-		if (hVel < 0 && directionTrait is Forward)
+		if (hVel < 0 && (directionTrait == null || directionTrait is Forward))
 		{
-			directionTrait.Remove();
+			if (directionTrait != null) directionTrait.Remove();
 			directionTrait = gameObject.AddComponent<Backward>();
 		}
-		else if (hVel > 0 && directionTrait is Backward)
+		else if (hVel > 0 && (directionTrait == null || directionTrait is Backward))
 		{
-			directionTrait.Remove();
+			if (directionTrait != null) directionTrait.Remove();
 			directionTrait = gameObject.AddComponent<Forward>();
 		}
 
